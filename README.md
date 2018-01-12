@@ -13,7 +13,7 @@ Then either
 or
 
 1. `elm-package install`
-1. `elm-live Main.elm --open --pushstate --docs=docs.json --output=elm.js`
+1. `elm-live src/Main.elm --open --pushstate --dir=static --docs=static/docs.json --output=static/elm.js`
 
 ## Adding a new module
 
