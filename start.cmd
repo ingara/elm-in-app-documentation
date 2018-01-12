@@ -1,1 +1,1 @@
-elm-package install && elm-live Main.elm --open --pushstate --docs=docs.json --output=elm.js
+elm-package install && elm-live src/Main.elm --open --pushstate --dir=static --docs=static/docs.json --output=static/elm.js
