@@ -1,22 +1,22 @@
 module Preview exposing (view)
 
 import Html exposing (..)
-import View
+import SharedViews
 
 
 view : String -> Html msg
 view name =
     case name of
-        "View.buttonPrimary" ->
+        "SharedViews.buttonPrimary" ->
             div []
-                [ View.buttonPrimary "Primary one"
-                , View.buttonPrimary "Primary two"
+                [ SharedViews.buttonPrimary "Primary one"
+                , SharedViews.buttonPrimary "Primary two"
                 ]
 
-        "View.buttonSecondary" ->
+        "SharedViews.buttonSecondary" ->
             div []
-                [ View.buttonSecondary "Secondary one"
-                , View.buttonSecondary "Secondary two"
+                [ SharedViews.buttonSecondary "Secondary one"
+                , SharedViews.buttonSecondary "Secondary two"
                 ]
 
         _ ->

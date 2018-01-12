@@ -3,7 +3,7 @@ module Main exposing (..)
 import Html exposing (Html, text)
 import Http exposing (Request)
 import Docs exposing (Docs)
-import Documentation
+import View
 
 
 docRequest : Request Docs
@@ -42,7 +42,7 @@ view : Model -> Html Msg
 view model =
     case model.docs of
         Just docs ->
-            Documentation.view docs
+            View.documentation docs
 
         Nothing ->
             text "Waiting for response..."
