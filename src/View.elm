@@ -4,6 +4,7 @@ import Docs exposing (Docs, Module, Value, Type, TypeCase, Alias)
 import Html exposing (..)
 import Preview
 import DocPrinting as Print
+import Markdown
 
 
 documentation : Docs -> Html msg
@@ -39,26 +40,22 @@ viewModule module_ =
 
 viewAlias : Alias -> Html msg
 viewAlias alias =
-    pre []
-        [ text <|
-            "{-|"
-                ++ alias.comment
-                ++ "-}"
-                ++ Print.newline
-                ++ Print.aliasToString alias
-        ]
+    showMarkdown <|
+        "{-|"
+            ++ alias.comment
+            ++ "-}"
+            ++ Print.newline
+            ++ Print.aliasToString alias
 
 
 viewType : Type -> Html msg
 viewType type_ =
-    pre []
-        [ text <|
-            "{-|"
-                ++ type_.comment
-                ++ "-}"
-                ++ Print.newline
-                ++ Print.typeToString type_
-        ]
+    showMarkdown <|
+        "{-|"
+            ++ type_.comment
+            ++ "-}"
+            ++ Print.newline
+            ++ Print.typeToString type_
 
 
 viewValue : String -> Value -> Html msg
@@ -70,17 +67,27 @@ viewValue moduleName value =
             ]
         , tr []
             [ td []
-                [ pre []
-                    [ text <|
-                        "{-|"
-                            ++ value.comment
-                            ++ "-}"
-                            ++ Print.newline
-                            ++ Print.valueToString value
-                    ]
+                [ showMarkdown <|
+                    "{-|"
+                        ++ value.comment
+                        ++ "-}"
+                        ++ Print.newline
+                        ++ Print.valueToString value
                 ]
             , td []
                 [ Preview.view <| moduleName ++ "." ++ value.name
                 ]
             ]
         ]
+
+
+showMarkdown : String -> Html msg
+showMarkdown str =
+    Markdown.toHtml [] <|
+        """
+```elm
+"""
+            ++ str
+            ++ """
+```
+"""

@@ -1,6 +1,7 @@
 module DocPrinting exposing (newline, aliasToString, typeToString, valueToString)
 
 import Docs exposing (Value, Type, TypeCase, Alias)
+import Regex
 
 
 newline : String
@@ -25,6 +26,8 @@ aliasToString alias =
         ++ " = "
         ++ newlineIndent
         ++ alias.type_
+        |> Regex.replace Regex.All (Regex.regex ", ") (\_ -> newlineIndent ++ ", ")
+        |> Regex.replace Regex.All (Regex.regex " }") (\_ -> newlineIndent ++ "}")
 
 
 typeToString : Type -> String
